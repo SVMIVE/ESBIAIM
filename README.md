@@ -1,2 +1,0 @@
-# ESBIAIM
-Entherprise Service Bus
