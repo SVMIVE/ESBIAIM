@@ -71,6 +71,11 @@ func (A *API) ListarDosa(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+//Opciones Militar
+func (A *API) Opciones(w http.ResponseWriter, r *http.Request) {
+	Cabecera(w, r)
+}
+
 //Consultar Militares
 func (p *Militar) Consultar(w http.ResponseWriter, r *http.Request) {
 	var traza fanb.Traza

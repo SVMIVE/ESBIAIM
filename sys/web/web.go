@@ -34,7 +34,8 @@ func CargarModulosWeb() {
 
 	Enrutador.HandleFunc("/", Principal)
 	Enrutador.HandleFunc("/iaim/api/", APi.Consultar).Methods("GET")
-	Enrutador.HandleFunc("/iaim/api/listar/", APi.ListarDosa).Methods("GET")
+	Enrutador.HandleFunc("/iaim/api/dosa/listar", APi.ListarDosa).Methods("POST")
+	Enrutador.HandleFunc("/iaim/api/dosa/listar", APi.ListarDosa).Methods("OPTIONS")
 
 }
 
@@ -43,6 +44,7 @@ func CargarModulosSeguridad() {
 	var wUsuario api.WUsuario
 	// Enrutador.HandleFunc("/ipsfa/app/api/wusuario/crud/{id}", wUsuario.Consultar).Methods("GET")
 	Enrutador.HandleFunc("/iaim/api/wusuario/login", wUsuario.Login).Methods("POST")
+	Enrutador.HandleFunc("/iaim/api/wusuario/login", wUsuario.Opciones).Methods("OPTIONS")
 	// Enrutador.HandleFunc("/ipsfa/api/wusuario/validar", wUsuario.ValidarToken(wUsuario.Autorizado)).Methods("POST")
 	// Enrutador.HandleFunc("/ipsfa/api/wusuario/listar", wUsuario.ValidarToken(wUsuario.Listar)).Methods("GET")
 	//
