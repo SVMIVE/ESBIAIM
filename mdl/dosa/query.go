@@ -1,6 +1,10 @@
 package dosa
 
-func SQLDosaTodas() string {
+type SQLDosa struct {
+}
+
+func (SD *SQLDosa) Base(donde string) string {
+
 	return `SELECT
 			cli.cod_cliente,
 			cli.nombre_cliente,
@@ -8,9 +12,9 @@ func SQLDosaTodas() string {
 			cli.cod_forma_pago,
 			co.cod_tipo_dosa,
 			co.id_dosa_anulada,
-			co.cod_tipo_moneda --,
-			--a.id_movimiento_aeronave,
-			--a.fecha_apertura as fecha_lleg_vuelo,
+			co.cod_tipo_moneda,
+			a.id_movimiento_aeronave,
+			a.fecha_apertura as fecha_lleg_vuelo --,
 			--vdh.id_tipo_vuelo,
 			--tv.tipo_vuelo,
 			--tv.descripcion as nom_tip_vuelo,
@@ -77,11 +81,16 @@ func SQLDosaTodas() string {
 			 (vdh1.id_vuelos_diarios=a.id_vuelos_diarios_salida)
 		LEFT JOIN fids.manten_tipo_vuelo tv ON tv.id_tipo_vuelo = vdh.id_tipo_vuelo
 		left JOIN fids.vuelos_asignacion_correa correa ON correa.id_vuelos_diarios = vdh.id_vuelos_diarios
-		--WHERE id_cobro='39617'
+	 ` + donde + `
 		--ORDER BY id_movimiento_aeronave DESC
-		LIMIT 10`
+		--LIMIT 10`
 }
 
-func SQLDosa() string {
-	return ``
+func (SD *SQLDosa) Idividual(idDosa string) string {
+	return SD.Base(" WHERE id_cobro='" + idDosa + "' ")
+}
+
+//Todas filtradas por fecha de apertura
+func (SD *SQLDosa) Todas(desde string, hasta string) string {
+	return SD.Base(" WHERE  co.fecha_apertura::date BETWEEN '" + desde + "' AND '" + hasta + "' ")
 }

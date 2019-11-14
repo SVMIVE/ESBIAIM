@@ -27,6 +27,13 @@ type API struct {
 	Tiempo   time.Time
 }
 
+//DOSA Estructura
+type WDosa struct {
+	Desde string `json:"desde"`
+	Hasta string `json:"hasta"`
+	//Tiempo time.Time
+}
+
 //Militar militares
 type Militar struct {
 	Frase string
@@ -58,9 +65,12 @@ func (A *API) ListarDosa(w http.ResponseWriter, r *http.Request) {
 
 	var dosa dosa.DOSA
 	Cabecera(w, r)
-
+	//fmt.Println("Conexion")
+	//var wdosa WDosa
+	// e := json.NewDecoder(r.Body).Decode(&wdosa)
+	// util.Error(e)
+	fmt.Printf("Bien pues")
 	j, err := dosa.Listar()
-
 	if err != nil {
 		w.WriteHeader(http.StatusForbidden)
 		w.Write([]byte("Error de conexión"))

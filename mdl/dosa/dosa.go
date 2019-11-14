@@ -31,17 +31,19 @@ type LDOSA struct {
 
 func (D *DOSA) Listar() (j []byte, err error) {
 	var lstDosa LDOSA
-	rs, err := sys.PostgreSQLSINIV.Query(SQLDosaTodas())
+	var sql SQLDosa
+	consulta := sql.Todas("2019-10-10", "2019-10-10")
+	rs, err := sys.PostgreSQLSINIV.Query(consulta)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	} else {
 		for rs.Next() {
 			var ds DOSA
-			var ccli, ncli, lote, formap string
+			var ccli, ncli, lote, formap, fchllev string
 			var cotipo, comon string
-			var idcoanu int64
-			rs.Scan(&ccli, &ncli, &lote, &formap, &cotipo, &idcoanu, &comon)
+			var idcoanu, idarn int64
+			rs.Scan(&ccli, &ncli, &lote, &formap, &cotipo, &idcoanu, &comon, &idarn, &fchllev)
 
 			ds.Cliente.Codigo = ccli
 			ds.Cliente.Nombre = ncli
@@ -50,7 +52,8 @@ func (D *DOSA) Listar() (j []byte, err error) {
 			ds.Cobro.CodTipoDosa = cotipo
 			ds.Cobro.IdDosaAnulada = idcoanu
 			ds.Cobro.CodTipoMoneda = comon
-
+			ds.Fids.Aeronave.IDMovimiento = idarn
+			ds.Fids.Vuelo.FechaLlegada = fchllev
 			lstDosa.Lista = append(lstDosa.Lista, ds)
 		}
 	}
