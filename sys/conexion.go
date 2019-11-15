@@ -8,8 +8,8 @@ import (
 	mgo "gopkg.in/mgo.v2"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/informaticaipsfa/tunel/util"
 	_ "github.com/lib/pq"
+	"github.com/svmive/esbiaim/util"
 )
 
 //MongoDBConexion Conexion a Mongo DB

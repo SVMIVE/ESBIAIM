@@ -14,8 +14,8 @@ import (
 
 	"gopkg.in/mgo.v2/bson"
 
-	"github.com/informaticaipsfa/tunel/sys"
-	"github.com/informaticaipsfa/tunel/util"
+	"github.com/svmive/esbiaim/sys"
+	"github.com/svmive/esbiaim/util"
 )
 
 const (

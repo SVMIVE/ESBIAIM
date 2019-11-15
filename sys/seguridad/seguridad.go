@@ -7,7 +7,7 @@ import (
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/informaticaipsfa/tunel/util"
+	"github.com/svmive/esbiaim/util"
 )
 
 //Constantes Generales

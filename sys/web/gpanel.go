@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/informaticaipsfa/tunel/sys/seguridad"
+	"github.com/svmive/esbiaim/sys/seguridad"
 )
 
 const (

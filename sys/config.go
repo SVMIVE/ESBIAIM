@@ -6,7 +6,7 @@ import (
 
 	mgo "gopkg.in/mgo.v2"
 
-	"github.com/informaticaipsfa/tunel/util"
+	"github.com/svmive/esbiaim/util"
 )
 
 type config struct{}

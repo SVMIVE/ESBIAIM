@@ -3,8 +3,8 @@ package seguridad
 import (
 	"time"
 
-	"github.com/informaticaipsfa/tunel/sys"
-	"github.com/informaticaipsfa/tunel/util"
+	"github.com/svmive/esbiaim/sys"
+	"github.com/svmive/esbiaim/util"
 	"gopkg.in/mgo.v2/bson"
 )
 

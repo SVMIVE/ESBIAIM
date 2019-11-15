@@ -3,8 +3,8 @@ package api
 import (
 	"net/http"
 
-	"github.com/informaticaipsfa/tunel/mdl/sssifanb/fanb"
 	"github.com/gorilla/mux"
+	"github.com/svmive/esbiaim/mdl/sssifanb/fanb"
 )
 
 type APIComponente struct{}
