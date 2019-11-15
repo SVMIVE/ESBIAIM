@@ -2,7 +2,7 @@ package sys
 
 const (
 	SERVERIMG         string = "htttp://localhost/imagenes/"
-	CBASE             string = "sssifanb"
+	CBASE             string = "siniv"
 	CTIM              string = "tim"
 	CESTADO           string = "estado"
 	CMILITAR          string = "militar"
