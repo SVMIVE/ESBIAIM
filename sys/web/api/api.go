@@ -34,6 +34,12 @@ type WDosa struct {
 	//Tiempo time.Time
 }
 
+//WSyBase Estructura
+type WSyBase struct {
+	Desde string `json:"desde"`
+	Hasta string `json:"hasta"`
+}
+
 //Militar militares
 type Militar struct {
 	Frase string

@@ -31,11 +31,14 @@ func Cargar() {
 //CargarModulosWeb Cargador de modulos web
 func CargarModulosWeb() {
 	var APi api.API
+	var sybase api.WSyBase
 
 	Enrutador.HandleFunc("/", Principal)
 	Enrutador.HandleFunc("/iaim/api/", APi.Consultar).Methods("GET")
 	Enrutador.HandleFunc("/iaim/api/dosa/listar", APi.ListarDosa).Methods("POST")
 	Enrutador.HandleFunc("/iaim/api/dosa/listar", APi.Opciones).Methods("OPTIONS")
+
+	Enrutador.HandleFunc("/iaim/api/sybase/listardocumentos", sybase.ListarDocumentos).Methods("POST")
 
 }
 
