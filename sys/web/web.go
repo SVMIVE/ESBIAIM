@@ -39,6 +39,7 @@ func CargarModulosWeb() {
 	Enrutador.HandleFunc("/iaim/api/dosa/listar", APi.Opciones).Methods("OPTIONS")
 
 	Enrutador.HandleFunc("/iaim/api/sybase/listardocumentos", sybase.ListarDocumentos).Methods("POST")
+	Enrutador.HandleFunc("/iaim/api/sybase/listardocumentos", APi.Opciones).Methods("OPTIONS")
 
 }
 

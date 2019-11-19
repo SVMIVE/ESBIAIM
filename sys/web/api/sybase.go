@@ -17,7 +17,7 @@ func (SB *WSyBase) ListarDocumentos(w http.ResponseWriter, r *http.Request) {
 	base := "http://192.168.10.66/app_dosa/webservices/ws_recaudacion.php?met=sybaseListarDocumentos"
 
 	err := json.NewDecoder(r.Body).Decode(&SB)
-	url := base + "|" + SB.Desde + ";" + SB.Hasta + ";cartelera;C312a1aywWev"
+	url := base + "|" + SB.Desde + ";FAC;A;cartelera;C312a1aywWev"
 	response, err := http.Get(url)
 	if err != nil {
 		M.Mensaje = err.Error()
