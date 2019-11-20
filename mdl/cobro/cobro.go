@@ -1,14 +1,15 @@
 package cobro
 
 type Cobro struct {
-	CodTipoDosa    string
-	IdDosaAnulada  int64
-	CodTipoMoneda  string
-	CodFactura     string
-	CodCierre      string
-	CodApertura    string
-	CodEstatus     string
-	FechaApaertura string
-	PesoMaximo     float64
-	Mixta          bool
+
+	CodTipoDosa    string	`json:"codtipodosa"`
+	IdDosaAnulada  int64	`json:"idanulada"`
+	IdCobro				 int64	`json:"idcobro"`
+	CodTipoMoneda  string	`json:"codtipomoneda"`
+	CodFactura     string	`json:"codfactura"`
+	CodCierre      string	`json:"codcierre"`
+	CodApertura    string	`json:"codapertura"`
+	CodEstatus     string	`json:"codestatus"`
+	FechaApertura  string	`json:"fechaapertura"`
+	Mixta          bool		`json:"mixta"`
 }
