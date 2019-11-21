@@ -62,3 +62,37 @@ func (D *DOSA) Listar() (j []byte, err error) {
 
 	return
 }
+
+func (D *DOSA) NoProcesadas() (j []byte, err error) {
+	var lstDosa LDOSA
+	var sql SQLDosa
+	consulta := sql.NoProcesadas("2019-09-01", "2019-10-31")
+	rs, err := sys.PostgreSQLSINIV.Query(consulta)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	} else {
+		for rs.Next() {
+			var ds DOSA
+			var ccli, ncli, lote, formap, fchllev string
+			var cotipo, comon string
+			var idcoanu, idarn int64
+			rs.Scan(&ccli, &ncli, &lote, &formap, &cotipo, &idcoanu, &comon, &idarn, &fchllev)
+
+			ds.Cliente.Codigo = ccli
+			ds.Cliente.Nombre = ncli
+			ds.Cliente.Lote = lote
+			ds.Cliente.FormaPago = formap
+			ds.Cobro.CodTipoDosa = cotipo
+			ds.Cobro.IdDosaAnulada = idcoanu
+			ds.Cobro.CodTipoMoneda = comon
+			ds.Fids.Aeronave.IDMovimiento = idarn
+			ds.Fids.Vuelo.FechaLlegada = fchllev
+			lstDosa.Lista = append(lstDosa.Lista, ds)
+		}
+	}
+	lstDosa.Fecha = time.Now()
+	j, err = json.Marshal(lstDosa)
+
+	return
+}

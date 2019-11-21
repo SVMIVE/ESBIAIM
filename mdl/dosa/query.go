@@ -94,3 +94,11 @@ func (SD *SQLDosa) Idividual(idDosa string) string {
 func (SD *SQLDosa) Todas(desde string, hasta string) string {
 	return SD.Base(" WHERE  co.fecha_apertura::date BETWEEN '" + desde + "' AND '" + hasta + "' ")
 }
+
+func (SD *SQLDosa) NoProcesadas(desde string, hasta string) string {
+	return SD.Base(
+		` WHERE (co.cod_status IN ('AB') or co.cod_status IS NULL) AND vdh.cod_terminal NOT IN ('A')
+		AND ((a.fecha_apertura::date BETWEEN  '` + desde + `' AND '` + hasta + `' ) or
+		(co.fecha_apertura::date BETWEEN   '` + desde + `' AND '` + hasta + `'  ))
+		ORDER BY id_movimiento_aeronave DESC `)
+}
