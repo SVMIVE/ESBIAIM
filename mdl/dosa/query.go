@@ -37,14 +37,14 @@ func (SD *SQLDosa) Base(donde string) string {
 			dosa_duplicada,
 			a.id_vuelos_diarios_salida,
 			co.peso_max_tonelada,
-			co.mixta--,
-			--co.correlativo_dm,
-			--cli.impresion_dosa,
-			  -- a.id_vuelos_diarios_llegada,
-			  -- fecha_inicio_asignacion as ini_asig_correa,
-		  	-- fecha_fin_asignacion as fin_asig_correa,
+			co.mixta,
+			co.correlativo_dm,
+			cli.impresion_dosa,
+		  a.id_vuelos_diarios_llegada,
+			  fecha_inicio_asignacion as ini_asig_correa,
+		  	fecha_fin_asignacion as fin_asig_correa--,
 			  -- (SELECT SUM(dcd.monto_cobro) as monto_total_dosa FROM dosas.cobros_detalles dcd WHERE dcd.id_cobro=co.id_cobro)
-			FROM fids.vuelos_movimientos_aeronaves a
+		FROM fids.vuelos_movimientos_aeronaves a
 		INNER JOIN fids.manten_aeronaves b ON a.id_aeronave = b.id_aeronave
 		LEFT JOIN fids.manten_tipo_aeronave mod ON b.id_modelo = mod.id_modelo
 		LEFT JOIN dosas.cobros co ON a.id_movimiento_aeronave = co.id_movimiento_aeronave

@@ -44,15 +44,15 @@ func (D *DOSA) Listar() (j []byte, err error) {
 		for rs.Next() {
 			var ds DOSA
 			var ccli, ncli, lote, formap, cotipo, comon, fchllev, tipvuelo, descpcion, horareal string
-			var hrlleg, hrsal, nac, codfac, codcie, codaper, codest, fecaper string
-			var idvuelo, idvdsali string
+			var hrlleg, hrsal, nac, codfac, codcie, codaper, codest, fecaper, correlativo string
+			var idvuelo, idvdsali, idvdlleg, inicorrea, fincorrea string
 			var idcoanu, idarn, idcobro, numlleg, numsal, espec, dupli int64
-			var mixta bool
+			var mixta, impresion bool
 			var pesomax, modaero float64
 			rs.Scan(&ccli, &ncli, &lote, &formap, &cotipo, &idcoanu, &comon, &idarn, &fchllev, &tipvuelo,
 				 			&idvuelo, &descpcion, &horareal, &numlleg, &numsal, &hrlleg, &hrsal, &nac, &idcobro,
 						 	&codfac, &codcie, &codaper, &codest, &fecaper, &modaero, &espec, &dupli, &idvdsali,
-							&pesomax, &mixta)
+							&pesomax, &mixta, &correlativo, &impresion, &idvdlleg, &inicorrea, &fincorrea)
 
 			ds.Cliente.Codigo = ccli
 			ds.Cliente.Nombre = ncli
@@ -84,8 +84,11 @@ func (D *DOSA) Listar() (j []byte, err error) {
 			ds.Fids.IdVuelosDiariosSalida= idvdsali
 			ds.Fids.Aeronave.PesoMaximo= pesomax
 			ds.Cobro.Mixta= mixta
-
-
+			ds.Cobro.Correlativo= correlativo
+			ds.Cliente.Impresion = impresion
+			ds.Fids.IdVuelosDiariosLlegada= idvdlleg
+			ds.Fids.InicioAsignacionCorrea= inicorrea
+			ds.Fids.FinAsignacionCorrea= fincorrea
 
 
 
