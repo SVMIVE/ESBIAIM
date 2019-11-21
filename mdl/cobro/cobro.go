@@ -12,4 +12,5 @@ type Cobro struct {
 	CodEstatus     string	`json:"codestatus"`
 	FechaApertura  string	`json:"fechaapertura"`
 	Mixta          bool		`json:"mixta"`
+	Correlativo		 string	`json:"correlativo"`
 }

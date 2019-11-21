@@ -17,4 +17,6 @@ type Fids struct {
 	Descripcion							 string		`json:"nombretipovuelo"`
 	IdVuelosDiariosSalida	 	 string		`json:"idvuelosdiariossalida"`
 	IdVuelosDiariosLlegada	 string		`json:"idvuelosdiariosllegada"`
+	InicioAsignacionCorrea	 string		`json:"inicioasignacioncorrea"`
+	FinAsignacionCorrea	 		 string		`json:"finasignacioncorrea"`
 }

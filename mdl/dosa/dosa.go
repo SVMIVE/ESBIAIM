@@ -112,10 +112,16 @@ func (D *DOSA) NoProcesadas() (j []byte, err error) {
 	} else {
 		for rs.Next() {
 			var ds DOSA
-			var ccli, ncli, lote, formap, fchllev string
-			var cotipo, comon string
-			var idcoanu, idarn int64
-			rs.Scan(&ccli, &ncli, &lote, &formap, &cotipo, &idcoanu, &comon, &idarn, &fchllev)
+			var ccli, ncli, lote, formap, cotipo, comon, fchllev, tipvuelo, descpcion, horareal string
+			var hrlleg, hrsal, nac, codfac, codcie, codaper, codest, fecaper, correlativo string
+			var idvuelo, idvdsali, idvdlleg, inicorrea, fincorrea string
+			var idcoanu, idarn, idcobro, numlleg, numsal, espec, dupli int64
+			var mixta, impresion bool
+			var pesomax, modaero float64
+			rs.Scan(&ccli, &ncli, &lote, &formap, &cotipo, &idcoanu, &comon, &idarn, &fchllev, &tipvuelo,
+				 			&idvuelo, &descpcion, &horareal, &numlleg, &numsal, &hrlleg, &hrsal, &nac, &idcobro,
+						 	&codfac, &codcie, &codaper, &codest, &fecaper, &modaero, &espec, &dupli, &idvdsali,
+							&pesomax, &mixta, &correlativo, &impresion, &idvdlleg, &inicorrea, &fincorrea)
 
 			ds.Cliente.Codigo = ccli
 			ds.Cliente.Nombre = ncli
@@ -125,7 +131,33 @@ func (D *DOSA) NoProcesadas() (j []byte, err error) {
 			ds.Cobro.IdDosaAnulada = idcoanu
 			ds.Cobro.CodTipoMoneda = comon
 			ds.Fids.Aeronave.IDMovimiento = idarn
-			ds.Fids.Vuelo.FechaLlegada = fchllev
+			ds.Fids.FechaLlegada = fchllev
+			ds.Fids.TipoVuelo = tipvuelo
+			ds.Fids.IdTipoVuelo = idvuelo
+			ds.Fids.Descripcion = descpcion
+			ds.Fids.HoraReal = horareal
+			ds.Fids.NumeroVueloLlegada = numlleg
+			ds.Fids.NumeroVueloSalida = numsal
+			ds.Fids.HoraRealLlegada = hrlleg
+			ds.Fids.HoraRealSalida = hrsal
+			ds.Fids.Nacionalidad = nac
+			ds.Cobro.IdCobro = idcobro
+			ds.Cobro.CodFactura = codfac
+			ds.Cobro.CodCierre = codcie
+			ds.Cobro.CodApertura = codaper
+			ds.Cobro.CodEstatus = codest
+			ds.Cobro.FechaApertura = fecaper
+			ds.Fids.Aeronave.ModeloAeronave = modaero
+			ds.Especial = espec
+			ds.Duplicada = dupli
+			ds.Fids.IdVuelosDiariosSalida= idvdsali
+			ds.Fids.Aeronave.PesoMaximo= pesomax
+			ds.Cobro.Mixta= mixta
+			ds.Cobro.Correlativo= correlativo
+			ds.Cliente.Impresion = impresion
+			ds.Fids.IdVuelosDiariosLlegada= idvdlleg
+			ds.Fids.InicioAsignacionCorrea= inicorrea
+			ds.Fids.FinAsignacionCorrea= fincorrea
 			lstDosa.Lista = append(lstDosa.Lista, ds)
 		}
 	}
