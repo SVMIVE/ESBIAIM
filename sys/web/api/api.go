@@ -87,6 +87,21 @@ func (A *API) ListarDosa(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// NoProcesadas
+func (A *API) NoProcesadas(w http.ResponseWriter, r *http.Request) {
+	var dosa dosa.DOSA
+	Cabecera(w, r)
+	j, err := dosa.NoProcesadas()
+	if err != nil {
+		w.WriteHeader(http.StatusForbidden)
+		w.Write([]byte("Error de conexión"))
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Write(j)
+	return
+}
+
 //Opciones Militar
 func (A *API) Opciones(w http.ResponseWriter, r *http.Request) {
 	Cabecera(w, r)

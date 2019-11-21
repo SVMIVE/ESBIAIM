@@ -32,14 +32,22 @@ func Cargar() {
 func CargarModulosWeb() {
 	var APi api.API
 	var sybase api.WSyBase
+	var tasaC api.TasaCambio
 
 	Enrutador.HandleFunc("/", Principal)
 	Enrutador.HandleFunc("/iaim/api/", APi.Consultar).Methods("GET")
+	//
 	Enrutador.HandleFunc("/iaim/api/dosa/listar", APi.ListarDosa).Methods("POST")
 	Enrutador.HandleFunc("/iaim/api/dosa/listar", APi.Opciones).Methods("OPTIONS")
+	//
+	Enrutador.HandleFunc("/iaim/api/dosa/noprocesadas", APi.NoProcesadas).Methods("POST")
+	Enrutador.HandleFunc("/iaim/api/dosa/noprocesadas", APi.Opciones).Methods("OPTIONS")
 
 	Enrutador.HandleFunc("/iaim/api/sybase/listardocumentos", sybase.ListarDocumentos).Methods("POST")
 	Enrutador.HandleFunc("/iaim/api/sybase/listardocumentos", APi.Opciones).Methods("OPTIONS")
+
+	Enrutador.HandleFunc("/iaim/api/sybase/listartasa", tasaC.Listar).Methods("GET")
+	Enrutador.HandleFunc("/iaim/api/sybase/listartasa", APi.Opciones).Methods("OPTIONS")
 
 }
 
