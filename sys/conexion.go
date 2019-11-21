@@ -23,7 +23,7 @@ func MongoDBConexion(mapa map[string]CadenaDeConexion) {
 //ConexionSAMAN Funcion de Conexion a Postgres
 func ConexionSINIV(mapa map[string]CadenaDeConexion) {
 	c := mapa["siniv"]
-	cadena := "user=" + c.Usuario + " dbname=" + c.Basedatos + " password=" + c.Clave + " host=" + c.Host + " sslmode=disable"
+	cadena := "user=" + c.Usuario + " port=" + c.Puerto + " dbname=" + c.Basedatos + " password=" + c.Clave + " host=" + c.Host + " sslmode=disable"
 	PostgreSQLSINIV, _ = sql.Open("postgres", cadena)
 	if PostgreSQLSINIV.Ping() != nil {
 		fmt.Println("[Siniv:   Error...] ", PostgreSQLSINIV.Ping())

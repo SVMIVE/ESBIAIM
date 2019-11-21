@@ -1,5 +1,5 @@
 package fids
 
-type Vuelo struct {
+type Vuelos struct {
 	FechaLlegada string `json:"fecha_llegada"`
 }
