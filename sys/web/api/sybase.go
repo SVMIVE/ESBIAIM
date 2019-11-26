@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/svmive/esbiaim/sys"
 )
 
 type Respuesta struct {
@@ -17,7 +19,7 @@ type TasaCambio struct {
 func (SB *WSyBase) ListarDocumentos(w http.ResponseWriter, r *http.Request) {
 	var M Respuesta
 	Cabecera(w, r)
-	base := "http://192.168.10.66/app_dosa/webservices/ws_recaudacion.php?met=sybaseListarDocumentos"
+	base := sys.HTTPAPISYBASE + "recaudacion.php?met=sybaseListarDocumentos"
 
 	err := json.NewDecoder(r.Body).Decode(&SB)
 	url := base + "|" + SB.Desde + ";FAC;A;cartelera;C312a1aywWev"
@@ -49,7 +51,7 @@ func (SB *WSyBase) ListarDocumentos(w http.ResponseWriter, r *http.Request) {
 func (Ts *TasaCambio) Listar(w http.ResponseWriter, r *http.Request) {
 	var M Respuesta
 	Cabecera(w, r)
-	base := "http://192.168.10.66/app_dosa/webservices/ws_recaudacion.php?met=AdminControl"
+	base := sys.HTTPAPISYBASE + "recaudacion.php?met=AdminControl"
 
 	url := base + "|cartelera;C312a1aywWev"
 	response, err := http.Get(url)

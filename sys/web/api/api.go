@@ -9,7 +9,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gorilla/mux"
 	"github.com/svmive/esbiaim/mdl/dosa"
 	"github.com/svmive/esbiaim/mdl/sssifanb"
 	"github.com/svmive/esbiaim/mdl/sssifanb/fanb"
@@ -38,19 +37,6 @@ type WDosa struct {
 type WSyBase struct {
 	Desde string `json:"desde"`
 	Hasta string `json:"hasta"`
-}
-
-//Militar militares
-type Militar struct {
-	Frase string
-	Tipo  int
-}
-
-//Componente Control Militar
-type Componente struct {
-	Componente string
-	Grado      string
-	Situacion  string
 }
 
 func (A *API) Consultar(w http.ResponseWriter, r *http.Request) {
@@ -107,141 +93,7 @@ func (A *API) Opciones(w http.ResponseWriter, r *http.Request) {
 	Cabecera(w, r)
 }
 
-//Consultar Militares
-func (p *Militar) Consultar(w http.ResponseWriter, r *http.Request) {
-	var traza fanb.Traza
-	Cabecera(w, r)
-	var dataJSON sssifanb.Militar
-	var cedula = mux.Vars(r)
-	dataJSON.Persona.DatoBasico.Cedula = cedula["id"]
-	j, e := dataJSON.Consultar()
-	if e != nil {
-		w.WriteHeader(http.StatusForbidden)
-		w.Write([]byte("Error al consultar los datos"))
-		return
-	}
-	ip := strings.Split(r.RemoteAddr, ":")
-	traza.IP = ip[0]
-	traza.Time = time.Now()
-	traza.Usuario = UsuarioConectado.Login
-	traza.Log = cedula["id"]
-	traza.Documento = "Consultando Militar"
-	traza.CrearHistoricoConsulta("historicoconsultas")
-	w.WriteHeader(http.StatusOK)
-	w.Write(j)
-}
-
-//Actualizar Datos Generales
-func (p *Militar) Actualizar(w http.ResponseWriter, r *http.Request) {
-
-	Cabecera(w, r)
-	ip := strings.Split(r.RemoteAddr, ":")
-	var dataJSON sssifanb.Militar
-	err := json.NewDecoder(r.Body).Decode(&dataJSON)
-	if err != nil {
-		fmt.Println(err.Error())
-		fmt.Println("Estoy en un error ", err.Error())
-		w.WriteHeader(http.StatusForbidden)
-		w.Write([]byte("Error al consultar los datos"))
-		return
-	}
-
-	j, _ := dataJSON.Actualizar(UsuarioConectado.Login, ip[0])
-	w.WriteHeader(http.StatusOK)
-	w.Write(j)
-}
-
-//Insertar Militar
-func (p *Militar) Insertar(w http.ResponseWriter, r *http.Request) {
-	Cabecera(w, r)
-	w.WriteHeader(http.StatusOK)
-
-}
-
-//Eliminar Militar
-func (p *Militar) Eliminar(w http.ResponseWriter, r *http.Request) {
-
-}
-
-//EstadisticasPorComponente
-func (p *Militar) EstadisticasPorComponente(w http.ResponseWriter, r *http.Request) {
-	Cabecera(w, r)
-	var militar sssifanb.Militar
-	j, _ := militar.EstadisticasPorComponente()
-	w.WriteHeader(http.StatusOK)
-	w.Write(j)
-}
-
-//ComponenteDecode Decodificando
-type ComponenteDecode struct {
-	Grado string
-}
-
-//EstadisticasPorGrado EstadisticasPorGrado
-func (p *Militar) EstadisticasPorGrado(w http.ResponseWriter, r *http.Request) {
-	Cabecera(w, r)
-	var militar sssifanb.Militar
-	var componente ComponenteDecode
-	err := json.NewDecoder(r.Body).Decode(&componente)
-	if err != nil {
-		fmt.Println(err.Error())
-		fmt.Println("Estoy en un error ", err.Error())
-		w.WriteHeader(http.StatusForbidden)
-		return
-	}
-	j, _ := militar.EstadisticasPorGrado(componente.Grado)
-	w.WriteHeader(http.StatusOK)
-	w.Write(j)
-}
-
-func (p *Militar) EstadisticasFamiliar(w http.ResponseWriter, r *http.Request) {
-	Cabecera(w, r)
-	// ip := strings.Split(r.RemoteAddr, ":")
-	var militar sssifanb.Militar
-
-	j, _ := militar.EstadisticasFamiliar()
-	w.WriteHeader(http.StatusOK)
-	w.Write(j)
-}
-
-//Listado Militares
-func (p *Militar) Listado(w http.ResponseWriter, r *http.Request) {
-	var traza fanb.Traza
-	var M sssifanb.Mensaje
-	var mil Militar
-	var dataJSON sssifanb.Militar
-
-	Cabecera(w, r)
-	ip := strings.Split(r.RemoteAddr, ":")
-
-	err := json.NewDecoder(r.Body).Decode(&mil)
-	if err != nil {
-		fmt.Println(err.Error())
-		M.Mensaje = err.Error()
-		w.WriteHeader(http.StatusForbidden)
-		j, _ := json.Marshal(M)
-		w.Write(j)
-		return
-	}
-	traza.IP = ip[0]
-	traza.Time = time.Now()
-	traza.Usuario = UsuarioConectado.Login
-	traza.Log = mil.Frase
-	traza.Documento = "Consultando Militar"
-	traza.CrearHistoricoConsulta("historicoconsultas")
-	j, _ := dataJSON.BusquedaFullText(mil.Frase, mil.Tipo)
-	w.WriteHeader(http.StatusOK)
-	w.Write(j)
-}
-
-//Opciones Militar
-func (p *Militar) Opciones(w http.ResponseWriter, r *http.Request) {
-	Cabecera(w, r)
-	fmt.Println("OPTIONS...")
-
-}
-
-func (p *Militar) SubirArchivos(w http.ResponseWriter, r *http.Request) {
+func (wyb *WSyBase) SubirArchivos(w http.ResponseWriter, r *http.Request) {
 	Cabecera(w, r)
 	var traza fanb.Traza
 	var M sssifanb.Mensaje
@@ -325,7 +177,7 @@ func (p *Militar) SubirArchivos(w http.ResponseWriter, r *http.Request) {
 }
 
 //SubirArchivosTXTPensiones Pensionados
-func (p *Militar) SubirArchivosTXTPensiones(w http.ResponseWriter, r *http.Request) {
+func (wyb *WSyBase) SubirArchivosTXTPensiones(w http.ResponseWriter, r *http.Request) {
 	Cabecera(w, r)
 	var traza fanb.Traza
 	var M sssifanb.Mensaje

@@ -6,21 +6,14 @@ import (
 	"net/http"
 
 	"github.com/svmive/esbiaim/sys"
-	"github.com/svmive/esbiaim/util"
 )
 
-//WFactura Familiares
-type WFactura struct {
-	Rif    string
-	Numero string
+type WCliente struct {
 }
 
-//FacturasPorPagar Facturas Por Pagar
-func (wfactura *WFactura) FacturasPorPagar(w http.ResponseWriter, r *http.Request) {
+func (wc *WCliente) Listar(w http.ResponseWriter, r *http.Request) {
 	var M Respuesta
 	Cabecera(w, r)
-	e := json.NewDecoder(r.Body).Decode(&wfactura)
-	util.Error(e)
 	base := sys.HTTPAPISYBASE + "recaudacion.php?met=FacturasPorPagar"
 
 	url := base + "|cartelera;C312a1aywWev"
