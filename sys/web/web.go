@@ -36,6 +36,7 @@ func CargarModulosWeb() {
 	var wFact api.WFactura
 	var wBanc api.WBanco
 	var wClient api.WCliente
+	var wConcep api.WConcepto
 
 	Enrutador.HandleFunc("/", Principal)
 	Enrutador.HandleFunc("/iaim/api/", APi.Consultar).Methods("GET")
@@ -52,14 +53,20 @@ func CargarModulosWeb() {
 	Enrutador.HandleFunc("/iaim/api/sybase/listartasa", tasaC.Listar).Methods("GET")
 	Enrutador.HandleFunc("/iaim/api/sybase/listartasa", APi.Opciones).Methods("OPTIONS")
 
-	Enrutador.HandleFunc("/iaim/api/sybase/facturaporpagar/listar", wFact.FacturasPorPagar).Methods("GET")
-	Enrutador.HandleFunc("/iaim/api/sybase/facturaporpagar/listar", APi.Opciones).Methods("OPTIONS")
+	Enrutador.HandleFunc("/iaim/api/sybase/factura/listar", wFact.Listar).Methods("GET")
+	Enrutador.HandleFunc("/iaim/api/sybase/factura/listar", APi.Opciones).Methods("OPTIONS")
 
 	Enrutador.HandleFunc("/iaim/api/sybase/banco/listar", wBanc.Listar).Methods("GET")
 	Enrutador.HandleFunc("/iaim/api/sybase/banco/listar", APi.Opciones).Methods("OPTIONS")
 
-	Enrutador.HandleFunc("/iaim/api/sybase/cliente/listar", wClient.Listar).Methods("GET")
-	Enrutador.HandleFunc("/iaim/api/sybase/cliente/listar", APi.Opciones).Methods("OPTIONS")
+	Enrutador.HandleFunc("/iaim/api/sybase/concepto/listar", wConcep.Listar).Methods("GET")
+	Enrutador.HandleFunc("/iaim/api/sybase/concepto/listar", APi.Opciones).Methods("OPTIONS")
+
+	Enrutador.HandleFunc("/iaim/api/sybase/banco/insertar", wBanc.Agregar).Methods("POST")
+	Enrutador.HandleFunc("/iaim/api/sybase/banco/insertar", APi.Opciones).Methods("OPTIONS")
+
+	Enrutador.HandleFunc("/iaim/api/sybase/cliente/lstactividad", wClient.ListarActividad).Methods("GET")
+	Enrutador.HandleFunc("/iaim/api/sybase/cliente/lstactividad", APi.Opciones).Methods("OPTIONS")
 
 }
 

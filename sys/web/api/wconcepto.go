@@ -8,13 +8,14 @@ import (
 	"github.com/svmive/esbiaim/sys"
 )
 
-type WCliente struct {
+type WConcepto struct {
 }
 
-func (wc *WCliente) ListarActividad(w http.ResponseWriter, r *http.Request) {
+func (wc *WConcepto) Listar(w http.ResponseWriter, r *http.Request) {
 	var M Respuesta
 	Cabecera(w, r)
-	url := sys.HTTPAPISYBASE + "cliente/lstactividad"
+
+	url := sys.HTTPAPISYBASE + "concepto/listar"
 	response, err := http.Get(url)
 	if err != nil {
 		M.Mensaje = err.Error()

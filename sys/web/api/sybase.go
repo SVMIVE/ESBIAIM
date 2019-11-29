@@ -51,9 +51,7 @@ func (SB *WSyBase) ListarDocumentos(w http.ResponseWriter, r *http.Request) {
 func (Ts *TasaCambio) Listar(w http.ResponseWriter, r *http.Request) {
 	var M Respuesta
 	Cabecera(w, r)
-	base := sys.HTTPAPISYBASE + "recaudacion.php?met=AdminControl"
-
-	url := base + "|cartelera;C312a1aywWev"
+	url := sys.HTTPAPISYBASE + "admincontrol/listar"
 	response, err := http.Get(url)
 	if err != nil {
 		M.Mensaje = err.Error()
