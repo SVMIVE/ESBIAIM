@@ -37,6 +37,8 @@ func CargarModulosWeb() {
 	var wBanc api.WBanco
 	var wClient api.WCliente
 	var wConcep api.WConcepto
+	var wActivi api.WActividad
+	var wDocume api.WDocumento
 
 	Enrutador.HandleFunc("/", Principal)
 	Enrutador.HandleFunc("/iaim/api/", APi.Consultar).Methods("GET")
@@ -67,6 +69,15 @@ func CargarModulosWeb() {
 
 	Enrutador.HandleFunc("/iaim/api/sybase/cliente/lstactividad", wClient.ListarActividad).Methods("GET")
 	Enrutador.HandleFunc("/iaim/api/sybase/cliente/lstactividad", APi.Opciones).Methods("OPTIONS")
+
+	Enrutador.HandleFunc("/iaim/api/sybase/cliente/listar", wClient.Listar).Methods("GET")
+	Enrutador.HandleFunc("/iaim/api/sybase/cliente/listar", APi.Opciones).Methods("OPTIONS")
+
+	Enrutador.HandleFunc("/iaim/api/sybase/actividad/listar", wActivi.Listar).Methods("GET")
+	Enrutador.HandleFunc("/iaim/api/sybase/actividad/listar", APi.Opciones).Methods("OPTIONS")
+
+	Enrutador.HandleFunc("/iaim/api/sybase/documento/lstdocactivos", wDocume.ListarDocActivos).Methods("GET")
+	Enrutador.HandleFunc("/iaim/api/sybase/documento/lstdocactivos", APi.Opciones).Methods("OPTIONS")
 
 }
 
