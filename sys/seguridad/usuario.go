@@ -70,6 +70,15 @@ type Menu struct {
 	Icono  string `json:"icono,omitempty"`
 	Nombre string `json:"nombre,omitempty"`
 	Accion string `json:"accion,omitempty"`
+	Submenu []Submenu `json:"submenu,omitempty"`
+}
+
+type Submenu struct {
+	Url    string `json:"url,omitempty"`
+	Js     string `json:"js,omitempty"`
+	Icono  string `json:"icono,omitempty"`
+	Nombre string `json:"nombre,omitempty"`
+	Accion string `json:"accion,omitempty"`
 }
 
 type Rol struct {

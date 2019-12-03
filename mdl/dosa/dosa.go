@@ -23,7 +23,7 @@ type DOSA struct {
 	Fids          fids.Fids       		`json:"Fids" bson:"fids"`
 	Cobro         cobro.Cobro     		`json:"Cobro" bson:"cobro"`
 	Vuelos        fids.Vuelos   			`json:"Vuelos" bson:"vuelos"`
-	Aeronave    	fids.Aeronave 				`json:"Aeronave" bson:"aeronave"`
+	Aeronave    	fids.Aeronave 			`json:"Aeronave" bson:"aeronave"`
 }
 
 type LDOSA struct {

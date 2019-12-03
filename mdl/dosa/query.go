@@ -86,7 +86,7 @@ func (SD *SQLDosa) Base(donde string) string {
 		--LIMIT 10`
 }
 
-func (SD *SQLDosa) Idividual(idDosa string) string {
+func (SD *SQLDosa) Individual(idDosa string) string {
 	return SD.Base(" WHERE id_cobro='" + idDosa + "' ")
 }
 
@@ -101,4 +101,9 @@ func (SD *SQLDosa) NoProcesadas(desde string, hasta string) string {
 		AND ((a.fecha_apertura::date BETWEEN  '` + desde + `' AND '` + hasta + `' ) or
 		(co.fecha_apertura::date BETWEEN   '` + desde + `' AND '` + hasta + `'  ))
 		ORDER BY id_movimiento_aeronave DESC `)
+}
+
+func (SD *SQLDosa) Diarias (fecha string) string {
+	return SD.Base(
+		``)
 }

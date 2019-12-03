@@ -6,5 +6,4 @@ type Aeronave struct {
 	MovimientoAeronave 	int64 	`json:"modeloaeronave"`
 	PesoMaximo    			float64	`json:"pesomaximo"`
 	ModeloAeronave    	float64	`json:"modeloaeronave"`
-
 }
