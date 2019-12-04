@@ -85,7 +85,6 @@ func (D *DOSA) Listar() (j []byte, err error) {
 			ds.Fids.Aeronave.PesoMaximo= pesomax
 			ds.Cobro.Mixta= mixta
 			ds.Cobro.Correlativo= correlativo
-			ds.Cliente.Impresion = impresion
 			ds.Fids.IdVuelosDiariosLlegada= idvdlleg
 			ds.Fids.InicioAsignacionCorrea= inicorrea
 			ds.Fids.FinAsignacionCorrea= fincorrea
@@ -154,7 +153,6 @@ func (D *DOSA) NoProcesadas() (j []byte, err error) {
 			ds.Fids.Aeronave.PesoMaximo= pesomax
 			ds.Cobro.Mixta= mixta
 			ds.Cobro.Correlativo= correlativo
-			ds.Cliente.Impresion = impresion
 			ds.Fids.IdVuelosDiariosLlegada= idvdlleg
 			ds.Fids.InicioAsignacionCorrea= inicorrea
 			ds.Fids.FinAsignacionCorrea= fincorrea

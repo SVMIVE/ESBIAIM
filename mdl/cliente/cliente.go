@@ -8,8 +8,8 @@ type Cliente struct {
 	Rif        	 					string `json:"rif" bson:"rif"`
 	TipoCliente 					string `json:"tipocliente" bson:"tipocliente"`
 	Estatus								string `json:"estatus" bson:"estatus"`
-	Actvidad	  					string   `json:"actividad" bson:"actividad"`
-	IngresosBrutos 				string   `json:"ingresosbrutos" bson:"ingresosbrutos"`
+	Actvidad	  					string `json:"actividad" bson:"actividad"`
+	IngresosBrutos 				string `json:"ingresosbrutos" bson:"ingresosbrutos"`
 	FechaInicioContrato 	string `json:"fechainiciocontrato" bson:"fechainiciocontrato"`
 	FechaModifContrato	 	string `json:"fechamodificacioncontrato" bson:"fechamodificacioncontrato"`
 	Email   							string `json:"formapago" bson:"formapago"`
