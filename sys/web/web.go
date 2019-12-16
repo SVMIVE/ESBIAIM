@@ -95,22 +95,11 @@ func CargarModulosWeb() {
 //CargarModulosSeguridad Y cifrado
 func CargarModulosSeguridad() {
 	var wUsuario api.WUsuario
-	// Enrutador.HandleFunc("/ipsfa/app/api/wusuario/crud/{id}", wUsuario.Consultar).Methods("GET")
 	Enrutador.HandleFunc("/iaim/api/wusuario/login", wUsuario.Login).Methods("POST")
 	Enrutador.HandleFunc("/iaim/api/wusuario/login", wUsuario.Opciones).Methods("OPTIONS")
 	// Enrutador.HandleFunc("/ipsfa/api/wusuario/validar", wUsuario.ValidarToken(wUsuario.Autorizado)).Methods("POST")
 	// Enrutador.HandleFunc("/ipsfa/api/wusuario/listar", wUsuario.ValidarToken(wUsuario.Listar)).Methods("GET")
-	//
-	// Enrutador.HandleFunc("/ipsfa/api/wusuario", wUsuario.Crear).Methods("POST")
-	// Enrutador.HandleFunc("/ipsfa/api/wusuario", wUsuario.ValidarToken(wUsuario.CambiarClave)).Methods("PUT")
-	// Enrutador.HandleFunc("/ipsfa/api/wusuario", wUsuario.ValidarToken(wUsuario.Opciones)).Methods("OPTIONS")
-	//
-	// Enrutador.HandleFunc("/ipsfa/api/wusuario", wUsuario.ValidarToken(wUsuario.Crear)).Methods("POST")
-	// Enrutador.HandleFunc("/ipsfa/api/wusuario", wUsuario.ValidarToken(wUsuario.CambiarClave)).Methods("PUT")
-	// Enrutador.HandleFunc("/ipsfa/api/wusuario", wUsuario.ValidarToken(wUsuario.Opciones)).Methods("OPTIONS")
-	// Enrutador.HandleFunc("/ipsfa/api/wusuario/listar", wUsuario.ValidarToken(wUsuario.Listar)).Methods("GET")
-	//
-	// Enrutador.HandleFunc("/ipsfa/api/wusuario/validarphp", wUsuario.ValidarToken(wUsuario.Autorizado)).Methods("GET")
+
 }
 
 //Principal Página inicial del sistema o bienvenida
@@ -122,12 +111,8 @@ func Principal(w http.ResponseWriter, r *http.Request) {
 //Tecnología Bootstrap3
 func WMAdminLTE() {
 	fmt.Println("Cargando Modulos de AdminLTE...")
-	// var GP = GPanel{}
-	// Enrutador.HandleFunc("/sssifanb/{id}", GP.IrA)
 	prefix := http.StripPrefix("/iaim", http.FileServer(http.Dir("public_web/SSSIFANB")))
 	Enrutador.PathPrefix("/iaim/").Handler(prefix)
-	// prefixx := http.StripPrefix("/bdse-admin/public/temp", http.FileServer(http.Dir("public/temp")))
-	// Enrutador.PathPrefix("/bdse-admin/public/temp/").Handler(prefixx)
 }
 
 //CargarModulosWebDevel Cargador de modulos web
