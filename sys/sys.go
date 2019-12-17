@@ -32,5 +32,5 @@ const (
 	CCOMERCIAL        string = "comercial"
 	CADMINISTRACION   string = "administracion"
 	CRECAUDACION      string = "recaudacion"
-	HTTPAPISYBASE     string = "http://192.168.41.24/ws_sybase/index.php/api/"
+	HTTPAPISYBASE     string = "http://192.168.41.24/ws_sybase/Webservices/index.php/api/"
 )

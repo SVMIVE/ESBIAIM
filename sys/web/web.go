@@ -40,6 +40,7 @@ func CargarModulosWeb() {
 	var wActivi api.WActividad
 	var wDocume api.WDocumento
 	var wServi api.WServicio
+	var wAdminC api.WAdminControl
 
 	Enrutador.HandleFunc("/", Principal)
 	Enrutador.HandleFunc("/iaim/api/", APi.Consultar).Methods("GET")
@@ -89,6 +90,10 @@ func CargarModulosWeb() {
 
 	Enrutador.HandleFunc("/iaim/api/sybase/documento/lstdocactivos", wDocume.ListarDocActivos).Methods("GET")
 	Enrutador.HandleFunc("/iaim/api/sybase/documento/lstdocactivos", APi.Opciones).Methods("OPTIONS")
+
+	//----------------------------- AdminControl ---------------------------------//
+	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/autoincrement", wAdminC.AutoIncrement).Methods("POST")
+	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/autoincrement", APi.Opciones).Methods("OPTIONS")
 
 }
 
