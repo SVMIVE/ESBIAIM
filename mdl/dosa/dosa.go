@@ -47,12 +47,12 @@ func (D *DOSA) Listar() (j []byte, err error) {
 			var hrlleg, hrsal, nac, codfac, codcie, codaper, codest, fecaper, correlativo string
 			var idvuelo, idvdsali, idvdlleg, inicorrea, fincorrea string
 			var idcoanu, idarn, idcobro, numlleg, numsal, espec, dupli int64
-			var mixta, impresion bool
+			var mixta bool
 			var pesomax, modaero float64
 			rs.Scan(&ccli, &ncli, &lote, &formap, &cotipo, &idcoanu, &comon, &idarn, &fchllev, &tipvuelo,
 				 			&idvuelo, &descpcion, &horareal, &numlleg, &numsal, &hrlleg, &hrsal, &nac, &idcobro,
 						 	&codfac, &codcie, &codaper, &codest, &fecaper, &modaero, &espec, &dupli, &idvdsali,
-							&pesomax, &mixta, &correlativo, &impresion, &idvdlleg, &inicorrea, &fincorrea)
+							&pesomax, &mixta, &correlativo, &idvdlleg, &inicorrea, &fincorrea)
 
 			ds.Cliente.Codigo = ccli
 			ds.Cliente.Nombre = ncli
@@ -115,12 +115,12 @@ func (D *DOSA) NoProcesadas() (j []byte, err error) {
 			var hrlleg, hrsal, nac, codfac, codcie, codaper, codest, fecaper, correlativo string
 			var idvuelo, idvdsali, idvdlleg, inicorrea, fincorrea string
 			var idcoanu, idarn, idcobro, numlleg, numsal, espec, dupli int64
-			var mixta, impresion bool
+			var mixta bool
 			var pesomax, modaero float64
 			rs.Scan(&ccli, &ncli, &lote, &formap, &cotipo, &idcoanu, &comon, &idarn, &fchllev, &tipvuelo,
 				 			&idvuelo, &descpcion, &horareal, &numlleg, &numsal, &hrlleg, &hrsal, &nac, &idcobro,
 						 	&codfac, &codcie, &codaper, &codest, &fecaper, &modaero, &espec, &dupli, &idvdsali,
-							&pesomax, &mixta, &correlativo, &impresion, &idvdlleg, &inicorrea, &fincorrea)
+							&pesomax, &mixta, &correlativo, &idvdlleg, &inicorrea, &fincorrea)
 
 			ds.Cliente.Codigo = ccli
 			ds.Cliente.Nombre = ncli

@@ -95,6 +95,7 @@ func CargarModulosWeb() {
 	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/autoincrement", wAdminC.AutoIncrement).Methods("POST")
 	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/autoincrement", APi.Opciones).Methods("OPTIONS")
 
+
 }
 
 //CargarModulosSeguridad Y cifrado

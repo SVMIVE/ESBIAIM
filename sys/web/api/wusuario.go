@@ -1,11 +1,13 @@
 package api
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"strings"
 	"time"
+	"io/ioutil"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go/request"
@@ -14,6 +16,8 @@ import (
 	"github.com/svmive/esbiaim/mdl/sssifanb/fanb"
 	"github.com/svmive/esbiaim/sys/seguridad"
 	"github.com/svmive/esbiaim/util"
+
+	"github.com/svmive/esbiaim/sys"
 )
 
 type WUsuario struct{}
@@ -83,10 +87,15 @@ func (u *WUsuario) CambiarClave(w http.ResponseWriter, r *http.Request) {
 	w.Write(j)
 }
 
+type WeUsuario struct {
+	Cedula   string `json:"login"`
+}
 //Login conexion para solicitud de token
 func (u *WUsuario) Login(w http.ResponseWriter, r *http.Request) {
 	var usuario seguridad.Usuario
+	var usr WeUsuario
 	var traza fanb.Traza
+	var M Respuesta
 	Cabecera(w, r)
 	e := json.NewDecoder(r.Body).Decode(&usuario)
 	util.Error(e)
@@ -110,11 +119,65 @@ func (u *WUsuario) Login(w http.ResponseWriter, r *http.Request) {
 		traza.Crear()
 		w.WriteHeader(http.StatusOK)
 		w.Write(j)
+
 	} else {
-		w.Header().Set("Content-Type", "application/text")
-		fmt.Println("Error en la conexion del usuario")
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintln(w, "Usuario y clave no validas")
+
+		url := sys.HTTPAPISYBASE + "usuario/consultar"
+
+		errx := json.NewDecoder(r.Body).Decode(&usr)
+		M.Tipo = 1
+		if errx != nil {
+			M.Mensaje = errx.Error()
+			M.Tipo = 0
+			fmt.Println(M.Mensaje)
+			j, _ := json.Marshal(M)
+			w.WriteHeader(http.StatusForbidden)
+			w.Write(j)
+			return
+		}
+
+		jsonW, ex := json.Marshal(usr)
+		if ex != nil {
+			fmt.Println(ex.Error())
+		}
+
+		response, err := http.Post(url, "application/json", bytes.NewBuffer(jsonW))
+		if err != nil {
+			M.Mensaje = err.Error()
+			M.Tipo = 0
+			w.WriteHeader(http.StatusOK)
+			j, _ := json.Marshal(M)
+			w.Write(j)
+			return
+		} else {
+			body, err := ioutil.ReadAll(response.Body)
+
+			if err != nil {
+
+				w.WriteHeader(http.StatusOK)
+				M.Mensaje = err.Error()
+				M.Tipo = 0
+				j, _ := json.Marshal(M)
+				w.Write(j)
+				return
+			}
+			defer response.Body.Close()
+			w.WriteHeader(http.StatusOK)
+
+			e := json.Unmarshal(body, &usr)
+			if e != nil {
+				return
+			}
+			usuario.Cedula = usr.Cedula
+
+			w.Write(body)
+			return
+		}
+
+		//w.Header().Set("Content-Type", "application/text")
+		//fmt.Println("Error en la conexion del usuario")
+		//w.WriteHeader(http.StatusForbidden)
+		//fmt.Fprintln(w, "Usuario y clave no validas")
 	}
 }
 
