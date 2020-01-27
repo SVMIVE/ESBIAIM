@@ -88,18 +88,33 @@ func (u *WUsuario) CambiarClave(w http.ResponseWriter, r *http.Request) {
 }
 
 type WeUsuario struct {
-	Cedula   string `json:"login"`
+	Usuario   string `json:"usuario"`
+	Nombre   	string `json:"nombre"`
+	Estatus   string `json:"estatus"`
+	Serie  	 	string `json:"serie"`
+	Numserie	string `json:"numserie"`
+	Nivel   	string `json:"nivel"`
+	Oficina   string `json:"oficina"`
+	Clave   	string `json:"clave"`
+
+
 }
+
+type LstUsuario struct {
+	Usuario []WeUsuario
+}
+
 //Login conexion para solicitud de token
 func (u *WUsuario) Login(w http.ResponseWriter, r *http.Request) {
 	var usuario seguridad.Usuario
-	var usr WeUsuario
+	var usr []WeUsuario
 	var traza fanb.Traza
 	var M Respuesta
+	var Nombre string
 	Cabecera(w, r)
 	e := json.NewDecoder(r.Body).Decode(&usuario)
 	util.Error(e)
-
+	Nombre = usuario.Nombre
 	usuario.Validar(usuario.Nombre, util.GenerarHash256([]byte(usuario.Clave)))
 
 	if usuario.Nombre != "" {
@@ -124,19 +139,8 @@ func (u *WUsuario) Login(w http.ResponseWriter, r *http.Request) {
 
 		url := sys.HTTPAPISYBASE + "usuario/consultar"
 
-		errx := json.NewDecoder(r.Body).Decode(&usr)
-		M.Tipo = 1
-		if errx != nil {
-			M.Mensaje = errx.Error()
-			M.Tipo = 0
-			fmt.Println(M.Mensaje)
-			j, _ := json.Marshal(M)
-			w.WriteHeader(http.StatusForbidden)
-			w.Write(j)
-			return
-		}
-
-		jsonW, ex := json.Marshal(usr)
+		usuario.Nombre = Nombre
+		jsonW, ex := json.Marshal(usuario)
 		if ex != nil {
 			fmt.Println(ex.Error())
 		}
@@ -144,33 +148,48 @@ func (u *WUsuario) Login(w http.ResponseWriter, r *http.Request) {
 		response, err := http.Post(url, "application/json", bytes.NewBuffer(jsonW))
 		if err != nil {
 			M.Mensaje = err.Error()
-			M.Tipo = 0
+			M.Tipo = -1
 			w.WriteHeader(http.StatusOK)
+
 			j, _ := json.Marshal(M)
 			w.Write(j)
 			return
 		} else {
+
 			body, err := ioutil.ReadAll(response.Body)
 
 			if err != nil {
 
 				w.WriteHeader(http.StatusOK)
 				M.Mensaje = err.Error()
-				M.Tipo = 0
+				M.Tipo = 1
 				j, _ := json.Marshal(M)
 				w.Write(j)
 				return
 			}
+
+
 			defer response.Body.Close()
-			w.WriteHeader(http.StatusOK)
+
 
 			e := json.Unmarshal(body, &usr)
 			if e != nil {
+				fmt.Println(e)
 				return
 			}
-			usuario.Cedula = usr.Cedula
+			usuario.Login = usr[0].Usuario
+			usuario.Serie = usr[0].Serie
+			//fmt.Println(usr.Usuario)
+			token := seguridad.GenerarJWT(usuario)
+			result := seguridad.RespuestaToken{Token: token}
+			j, e := json.Marshal(result)
+			util.Error(e)
+			w.WriteHeader(http.StatusOK)
+			//j, _ := json.Marshal(usr)
+			w.Write(j)
+			//w.WriteHeader(http.StatusOK)
 
-			w.Write(body)
+			//w.Write(body)
 			return
 		}
 

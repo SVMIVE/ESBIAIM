@@ -107,6 +107,7 @@ type Usuario struct {
 	Telefono      string        `json:"telefono,omitempty" bson:"telefono"`
 	Cargo         string        `json:"cargo,omitempty" bson:"cargo"`
 	Modulo        []string      `json:"modulo,omitempty" bson:"modulo"`
+	Serie					string 				`json:"serie,omitempty" bson:"serie"`
 }
 
 //FirmaDigital La firma permite identificar una maquina y persona autorizada por el sistema

@@ -42,7 +42,7 @@ func CargarModulosWeb() {
 	var wServi api.WServicio
 	var wAdminC api.WAdminControl
 
-	Enrutador.HandleFunc("/", Principal)
+	//Enrutador.HandleFunc("/", Principal)
 	Enrutador.HandleFunc("/iaim/api/", APi.Consultar).Methods("GET")
 	//
 	Enrutador.HandleFunc("/iaim/api/dosa/listar", APi.ListarDosa).Methods("POST")
@@ -116,9 +116,9 @@ func Principal(w http.ResponseWriter, r *http.Request) {
 //WMAdminLTE OpenSource tema de panel de control
 //Tecnología Bootstrap3
 func WMAdminLTE() {
-	fmt.Println("Cargando Modulos de AdminLTE...")
-	prefix := http.StripPrefix("/iaim", http.FileServer(http.Dir("public_web/SSSIFANB")))
-	Enrutador.PathPrefix("/iaim/").Handler(prefix)
+	fmt.Println("Cargando Modulos de Ngx-Recaudaciones...")
+	prefix := http.StripPrefix("/", http.FileServer(http.Dir("public_web/iaim/")))
+	Enrutador.PathPrefix("/").Handler(prefix)
 }
 
 //CargarModulosWebDevel Cargador de modulos web

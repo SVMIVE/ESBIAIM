@@ -2,3 +2,4 @@
 /start.sh
 sys/config_dev.json
 tmp/*
+public_web/iaim/*
