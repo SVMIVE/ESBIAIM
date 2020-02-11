@@ -96,6 +96,7 @@ type WeUsuario struct {
 	Nivel   	string `json:"nivel"`
 	Oficina   string `json:"oficina"`
 	Clave   	string `json:"clave"`
+	Consulta 	string `json:"consulta"`
 
 
 }
@@ -179,6 +180,7 @@ func (u *WUsuario) Login(w http.ResponseWriter, r *http.Request) {
 			}
 			usuario.Login = usr[0].Usuario
 			usuario.Serie = usr[0].Serie
+			usuario.Rol.Descripcion= usr[0].Consulta
 			//fmt.Println(usr.Usuario)
 			token := seguridad.GenerarJWT(usuario)
 			result := seguridad.RespuestaToken{Token: token}

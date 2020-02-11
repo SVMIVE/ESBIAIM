@@ -75,9 +75,13 @@ func CargarModulosWeb() {
 	Enrutador.HandleFunc("/iaim/api/sybase/cliente/lstactividad", APi.Opciones).Methods("OPTIONS")
 	Enrutador.HandleFunc("/iaim/api/sybase/cliente/listar", wClient.Listar).Methods("GET")
 	Enrutador.HandleFunc("/iaim/api/sybase/cliente/listar", APi.Opciones).Methods("OPTIONS")
+	Enrutador.HandleFunc("/iaim/api/sybase/cliente/pagos", wClient.Pagos).Methods("POST")
+	Enrutador.HandleFunc("/iaim/api/sybase/cliente/pagos", APi.Opciones).Methods("OPTIONS")
 
 	Enrutador.HandleFunc("/iaim/api/sybase/cliente/insertar", wClient.Insertar).Methods("POST")
 	Enrutador.HandleFunc("/iaim/api/sybase/cliente/insertar", APi.Opciones).Methods("OPTIONS")
+	Enrutador.HandleFunc("/iaim/api/sybase/cliente/consultar", wClient.Consultar).Methods("POST")
+	Enrutador.HandleFunc("/iaim/api/sybase/cliente/consultar", APi.Opciones).Methods("OPTIONS")
 
 	Enrutador.HandleFunc("/iaim/api/sybase/cliente/razonsocial", wClient.RazonSocial).Methods("POST")
 	Enrutador.HandleFunc("/iaim/api/sybase/cliente/razonsocial", APi.Opciones).Methods("OPTIONS")
@@ -94,6 +98,10 @@ func CargarModulosWeb() {
 	//----------------------------- AdminControl ---------------------------------//
 	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/autoincrement", wAdminC.AutoIncrement).Methods("POST")
 	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/autoincrement", APi.Opciones).Methods("OPTIONS")
+	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/insertjoin", wAdminC.InsertJoin).Methods("POST")
+	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/insertjoin", APi.Opciones).Methods("OPTIONS")
+	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/insertinto", wAdminC.InsertInto).Methods("POST")
+	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/insertinto", APi.Opciones).Methods("OPTIONS")
 
 
 }
