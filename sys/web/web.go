@@ -103,6 +103,9 @@ func CargarModulosWeb() {
 	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/insertinto", wAdminC.InsertInto).Methods("POST")
 	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/insertinto", APi.Opciones).Methods("OPTIONS")
 
+	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/formapago", wAdminC.FormaPago).Methods("GET")
+	Enrutador.HandleFunc("/iaim/api/sybase/admincontrol/formapago", APi.Opciones).Methods("OPTIONS")
+
 
 }
 
